@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import classes from "./MainNavigation.module.css";
-import { useTotalFavorites } from "../../store/favorites-context";
+import { useTotalFavorites } from "../../store/selectors";
 
 function MainNavigation() {
   const totalFavorites = useTotalFavorites();

@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
-import { FavoritesContextProvider } from './store/favorites-context';
+import { FavoritesContextProvider } from './store/context-reducer';
 
 ReactDOM.render(
   <FavoritesContextProvider>

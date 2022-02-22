@@ -1,27 +1,24 @@
 import { useState, useEffect, useContext } from "react";
 
 import MeetupList from "../components/meetups/MeetupList";
-import { useAddMeetupItem, useMeetups } from "../store/favorites-context";
+import { useMeetup } from "./../store/hooks/hooks";
 
 function AllMeetupsPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const meetups = useMeetups();
-  const addMeetupItem = useAddMeetupItem();
+  const [meetups, actionsMeetup] = useMeetup();
 
-  useEffect(() => {
+  useEffect(async () => {
     if (meetups.length === 0) {
       setIsLoading(true);
-      fetch("./meetups.json")
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          for (const key in data) {
-            addMeetupItem(data[key]);
-          }
 
-          setIsLoading(false);
-        });
+      const meetupResponese = await fetch("./meetups.json");
+      const data = await meetupResponese.json();
+
+      for (const key in data) {
+        actionsMeetup.addMeedups({ meetups: data[key] });
+      }
+
+      setIsLoading(false);
     } else setIsLoading(false);
   }, []);
 

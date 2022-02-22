@@ -1,12 +1,11 @@
 import Card from "../ui/Card";
 import classes from "./MeetupItem.module.css";
-
-import { useItemIsFavorite, useRemoveFavorite, useAddFavorite } from "../../store/favorites-context";
+import { useItemIsFavorite } from "../../store/selectors";
+import { useFavoriteActions } from "../../store/actions";
 
 function MeetupItem(props) {
   const itemIsFavorite = useItemIsFavorite(props.id);
-  const removeFavorite = useRemoveFavorite();
-  const addFavorite = useAddFavorite();
+  const { addFavorite, removeFavorite } = useFavoriteActions();
 
   function toggleFavoriteStatusHandler() {
     if (itemIsFavorite) {

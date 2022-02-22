@@ -1,9 +1,10 @@
-import { useTotalFavorites, useFavorites } from "../store/favorites-context";
+import { useTotalFavorites, useGetFavorites } from "./../store/selectors";
 import MeetupList from "../components/meetups/MeetupList";
 
 function FavoritesPage() {
+  const favorites = useGetFavorites();
   const totalFavorites = useTotalFavorites();
-  const favorites = useFavorites();
+
   const content =
     totalFavorites === 0 ? <p>You got no favorites yet. Start adding some?</p> : <MeetupList meetups={favorites} />;
 

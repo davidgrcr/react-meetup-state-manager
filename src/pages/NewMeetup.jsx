@@ -1,16 +1,13 @@
 import { useNavigate } from "react-router-dom";
-
-import { useAddMeetupItem, useMeetups } from "../store/favorites-context";
-
+import { useMeetup } from "../store/hooks/hooks";
 import NewMeetupForm from "../components/meetups/NewMeetupForm";
 
 function NewMeetupPage() {
   const navigate = useNavigate();
-  const addMeetupItem = useAddMeetupItem();
-  const meetups = useMeetups();
+  const [meetups, meetupActions] = useMeetup();
 
   function addMeetupHandler(meetupData) {
-    addMeetupItem({ ...meetupData, id: `m${meetups.length + 1}` });
+    meetupActions.addMeedups({ meetups: { ...meetupData, id: `m${meetups.length + 1}` } });
     navigate("/");
   }
 
